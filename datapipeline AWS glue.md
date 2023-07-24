@@ -1,231 +1,154 @@
+<style>
+  img {
+    width: 7.334645669291339in;
+    height: 3.3472222222222223in;
+    display: block;
+    margin: 0 auto;
+  }
+</style>
+
 # Automated Data Pipeline using SPARK, AWS GLUE, LAMBDA & S3
 
 ## Objectives
 
--   Develop an automated data pipeline to process large volumes of data
-    > efficiently using Apache Spark, leveraging its distributed
-    > computing capabilities.
+- Develop an automated data pipeline to process large volumes of data efficiently using Apache Spark, leveraging its distributed computing capabilities.
+- Integrate data from various sources into a unified and structured format using AWS Glue, a fully managed ETL (Extract, Transform, Load) service.
+- Utilize AWS Lambda to enable real-time data processing, allowing for immediate actions and insights based on incoming data streams.
+- Implement a reliable and scalable data storage solution using Amazon S3.
+- Set up comprehensive monitoring and alerting mechanisms to proactively identify and address any issues within the data pipeline.
 
--   Integrate data from various sources into a unified and structured
-    > format using AWS Glue, a fully managed ETL (Extract, Transform,
-    > Load) service.
+<center>
+<div style="text-align: center;">
 
--   Utilize AWS Lambda to enable real-time data processing, allowing for
-    > immediate actions and insights based on incoming data streams.
+| Time of performing  | 30 minutes                                   |
+|---------------------|----------------------------------------------|
+| Required services   | Amazon S3, Glue, Lambda, CloudWatch, and PySpark |
 
--   Implement a reliable and scalable data storage solution using Amazon
-    > S3.
-
--   Set up comprehensive monitoring and alerting mechanisms to
-    > proactively identify and address any issues within the data
-    > pipeline.
-
-  -----------------------------------------------------------------------
-  Time of performing  30 minutes
-  ------------------- ---------------------------------------------------
-  Required services   Amazon S3, Glue, Lambda, CloudWatch, and PySpark
-
-  -----------------------------------------------------------------------
+</div>
+</center>
 
 ## Step 1: Source and destination S3 bucket
 
-Pay attention to bucket names in order to avoid confusing them with
-others and endeavor to commit descriptive names for each one. Once
-created, no more editions are needed on this step.
+Pay attention to bucket names in order to avoid confusing them with others and endeavor to commit descriptive names for each one. Once created, no more editions are needed on this step.
 
-Create a source s3 bucket considering the following settings.
+Create a source S3 bucket considering the following settings.
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image37.png){width="7.334645669291339in"
-height="3.236111111111111in"}
+![Source S3 Bucket Settings](resources/gluedatapipeline/image37.png)
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image29.png){width="7.334645669291339in"
-height="3.236111111111111in"}
+Create a destination S3 bucket considering the following settings.
 
-Create a destination s3 bucket considering the following settings.
-
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image5.png){width="7.334645669291339in"
-height="3.236111111111111in"}
-
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image28.png){width="7.334645669291339in"
-height="1.6527777777777777in"}
+![Destination S3 Bucket Settings](resources/gluedatapipeline/image5.png)
 
 ## Step 2: Create a role for Glue
 
-Throughout this step. By granting access to Cloud Watch for tracking the
-logs and to S3 for storing outputs after running the pipelines, we will
-create a specific Glue role.
+Throughout this step, we will create a specific Glue role by granting access to CloudWatch for tracking the logs and to S3 for storing outputs after running the pipelines.
 
-Chose IAM service.
+Choose IAM service.
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image10.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
+![Choose IAM Service](resources/gluedatapipeline/image10.png)
 
-Chose the case AWS service Glue and press next.
+Choose the case AWS service Glue and press next.
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image12.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
+![Choose AWS Glue Service](resources/gluedatapipeline/image12.png)
 
-For this role, we just need permitting full access to S3 and CloudWatch.
-Press next afterward.
+For this role, we just need to permit full access to S3 and CloudWatch. Press next afterward.
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image25.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
+![Permissions for Glue Role](resources/gluedatapipeline/image25.png)
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image43.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
+Ensure the name of the role is descriptive to match those services that are intended. Fulfill a description is optional.
 
-Ensure the name of the role is descriptive to match those services that
-are intended. Fulfill a description is optional.
-
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image16.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
+![Name and Description for Glue Role](resources/gluedatapipeline/image16.png)
 
 Finally, create the role.
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image19.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
+![Create Glue Role](resources/gluedatapipeline/image19.png)
 
-## 
+## Step 3: Create a Lambda role
 
-## 
+Similar to step two, we will be reviewing sufficient permissions by creating a specific role for the AWS Lambda service, granting access to CloudWatch, S3 storing, and Glue.
 
-## Paso 3: Create a Lambda role
+Choose IAM service.
 
-Similar to step two, we will be reviewing sufficient permissions by
-creating a specific role for aws lambda service, granting access to
-CloudWatch, S3 storing, and Glue. This role will be required for
-creating a function on AWS lambda that will let to activate glue jobs
-and store inputs.
-
-Chose IAM service.
-
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image42.png){width="7.334645669291339in"
-height="3.2777777777777777in"}
+![Choose IAM Service](resources/gluedatapipeline/image42.png)
 
 Press on *Create role* button.
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image44.png){width="7.334645669291339in"
-height="2.9027777777777777in"}
+![Create Role Button](resources/gluedatapipeline/image44.png)
 
-Select the following permissions policies. Finally, press the create
-*role* button.
+Select the following permissions policies. Finally, press the create *role* button.
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image34.png){width="7.334645669291339in"
-height="2.9027777777777777in"}
+![Permissions for Lambda Role](resources/gluedatapipeline/image34.png)
 
-## Paso 4 Create a Lambda function 
+## Step 4: Create a Lambda function
 
-On creating a function on Lambda or serverless will let us communicate
-our data stored at the source S3 bucket with AWS Glue every time that
-one file is uploaded.
+Creating a function on Lambda or serverless will let us communicate our data stored at the source S3 bucket with AWS Glue every time that one file is uploaded.
 
 In the searcher, type Lambda and click on the service.
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image21.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
+![Search Lambda Service](resources/gluedatapipeline/image21.png)
 
-When you are in, press "create a function". Make sure on its name and
-python version to use.
+When you are in, press "create a function". Make sure on its name and python version to use.
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image36.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
+![Create Lambda Function](resources/gluedatapipeline/image36.png)
 
-Chose the role configured in step 3 and press create function.
+Choose the role configured in step 3 and press create function.
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image41.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
+![Configure Lambda Function Role](resources/gluedatapipeline/image41.png)
 
-Once created the function, select the source of the function that will
-work as a trigger. It means that every time you want to activate the
-function then upload data into source storage will be required. So,
-click on "Add trigger", and choose S3 as storage, in addition, select
-the bucket that you created as the source. Ensure of following the rest
-of the configuration as it is presented below.
+Once created the function, select the source of the function that will work as a trigger. It means that every time you want to activate the function, then uploading data into the source storage will be required. So, click on "Add trigger", and choose S3 as storage, in addition, select the bucket that you created as the source. Ensure of following the rest of the configuration as it is presented below.
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image9.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
-
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image23.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
-
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image33.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
+![Configure S3 Trigger for Lambda Function](resources/gluedatapipeline/image9.png)
 
 We will see the data source has been chosen.
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image30.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
+![Selected S3 Bucket as Trigger](resources/gluedatapipeline/image30.png)
 
 Change the tab to *code.*
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image27.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
-
-Paste this code.
-
-\`\`\`
-
-import json
-
-import boto3
-
-def lambda_handler(event, context):
-
-file_name = event\[\'Records\'\]\[0\]\[\'s3\'\]\[\'object\'\]\[\'key\'\]
-
-bucketName=event\[\'Records\'\]\[0\]\[\'s3\'\]\[\'bucket\'\]\[\'name\'\]
-
-print(\"File Name : \",file_name)
-
-print(\"Bucket Name : \",bucketName)
-
-glue=boto3.client(\'glue\');
-
-response = glue.start_job_run(JobName = \"s3_lambda_glue_s3\",
-Arguments={\"\--VAL1\":file_name,\"\--VAL2\":bucketName})
-
-print(\"Lambda Invoke \")
-
-\`\`\`
-
-Verify to change the name what AWS Glue will be named with.
-
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image20.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
-
-Deploy the function by pressing the button *Deploy*
-
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image6.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
-
-## Step 5: Create a Glue data pipeline job 
-
-It is important to mention the design of pipelines should take into
-account reliability. So this configuration will not outline this
-approach but will highlight the pragmatic usage of the tool including
-distributed computing by pyspark.
-
-Look for AWS glue in the searcher and click it.
-
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image4.png){width="7.334645669291339in"
-height="3.2777777777777777in"}
-
-On the left side press on ETL jobs and select the option *Spark script
-editor*. Subsequently, click on *Create* job.
-
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image31.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
-
-Guarantee that its name is congruent with step 4, i.e. the Glue's name
-job is consistent after triggering the lambda function that will look
-for activating this current job.
-
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image1.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
+![Change to Lambda Function Code](resources/gluedatapipeline/image27.png)
 
 Paste this code:
 
-\`\`\`
+```python
+import json
+import boto3
+
+def lambda_handler(event, context):
+    file_name = event['Records'][0]['s3']['object']['key']
+    bucketName = event['Records'][0]['s3']['bucket']['name']
+    print("File Name: ", file_name)
+    print("Bucket Name: ", bucketName)
+
+    glue = boto3.client('glue')
+    response = glue.start_job_run(JobName="s3_lambda_glue_s3", Arguments={"--VAL1": file_name, "--VAL2": bucketName})
+    print("Lambda Invoke")
+```
+Verify to change the name what AWS Glue will be named with.
+![Image](./resources/gluedatapipeline/image20.png)
+
+Deploy the function by pressing the button *Deploy*
+
+![Image](resources/gluedatapipeline/image6.png)
+
+## Step 5: Create a Glue data pipeline job 
+
+It is important to mention the design of pipelines should take into account reliability. So this configuration will not outline this approach but will highlight the pragmatic usage of the tool including distributed computing by pyspark.
+
+Look for AWS glue in the searcher and click it.
+
+![Image](resources/gluedatapipeline/image4.png)
+
+On the left side press on ETL jobs and select the option *Spark script editor*. Subsequently, click on *Create* job.
+
+![Image](resources/gluedatapipeline/image31.png)
+
+Guarantee that its name is congruent with step 4, i.e. the Glue's name job is consistent after triggering the lambda function that will look for activating this current job.
+
+![Image](resources/gluedatapipeline/image1.png)
+
+Paste this code:
+
+```python
 
 import sys
 
@@ -324,43 +247,37 @@ df1.coalesce(1).write.format(\"csv\").option(\"header\",
 
 main()
 
-\`\`\`
+```
 
-Review the code previously and stablish that destination S3 bucket is
-figuring in the code as follow.
+Review the code previously and establish that destination S3 bucket is
+figuring in the code as follows.
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image45.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
+![Image](./resources/gluedatapipeline/image45.png)
 
-Review additional details like name, description and bind the role
+Review additional details like name, description, and bind the role
 created in step 2.
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image22.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
+![Image](./resources/gluedatapipeline/image22.png)
 
 Select the environment of development that will make sure to run the
 data pipeline by spark algorithms.
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image15.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
+![Image](./resources/gluedatapipeline/image15.png)
 
 Keep these options selected because it would be useful to optimize
 costs. And, press *Save.*
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image39.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
+![Image](./resources/gluedatapipeline/image39.png)
 
 Upon saving the script and its configuration will show up a message of
 the updating.
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image2.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
+![Image](./resources/gluedatapipeline/image2.png)
 
 Look for the *ETL jobs* after successfully creating the script to see
 the job.
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image3.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
+![Image](./resources/gluedatapipeline/image3.png)
 
 ## Step 6: Activate the Lambda function and Glue job
 
@@ -369,102 +286,72 @@ JSON data structured to CSV format has come. First, we need to write a
 file, save it, and upload it to the source storage in S3 so our lambda
 function will note this new file after being triggered during the
 uploading. The serverless function will activate the glue job. Finally,
-the data pipeline will process the data import to output as CSV file at
-destination storage S3 bucket.
+the data pipeline will process the data import to output as a CSV file at
+the destination storage S3 bucket.
 
 Write a JSON file.
 
-\`\`\`
-
+```json
 {
-
-\"firstName\": \"Cael\",
-
-\"lastName\": \"Tarifa\",
-
-\"age\": 30,
-
-\"address\": {
-
-\"streetAddress\": \"Av Balmaceda\",
-
-\"city\": \"Santiago\",
-
-\"state\": \"Metropolitan region of Santiago\",
-
-\"postalCode\": \"55433\"
-
-},
-
-\"phoneNumber\": \[
-
-{
-
-\"type\": \"office\",
-
-\"number\": \"22397328\"
-
-},
-
-{
-
-\"type\": \"private\",
-
-\"number\": \"38489200\"
-
+  "firstName": "Cael",
+  "lastName": "Tarifa",
+  "age": 30,
+  "address": {
+    "streetAddress": "Av Balmaceda",
+    "city": "Santiago",
+    "state": "Metropolitan region of Santiago",
+    "postalCode": "55433"
+  },
+  "phoneNumber": [
+    {
+      "type": "office",
+      "number": "22397328"
+    },
+    {
+      "type": "private",
+      "number": "38489200"
+    }
+  ]
 }
-
-\]
-
-}
-
-\`\`\`
+```
 
 Go to the source S3 bucket and add the file written.
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image24.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
+![Image](resources/gluedatapipeline/image24.png)
 
 Once the file has been uploaded, the trigger has automatically been
 activated.
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image26.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
+![Image](resources/gluedatapipeline/image26.png)
 
 Let's see in the tab of *Monitor* from our lambda function. And open an
 external tab after clicking on *View CloudWatch Logs* button*.*
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image32.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
+![Image](resources/gluedatapipeline/image32.png)
 
 AWS CloudWatch service is opened, and click on *Search log group.*
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image11.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
+![Image](resources/gluedatapipeline/image11.png)
 
 We see the last logs which can verify the activity of our function. It
 was on.
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image35.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
+![Image](resources/gluedatapipeline/image35.png)
 
 On the left side, press *Log Groups* to see all the last log streams
 that ran.
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image7.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
+![Image](resources/gluedatapipeline/image7.png)
 
 Now, let's verify that our ETL job on Glue is working accordingly by
 reachin Glue service again and clicking the job.
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image17.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
+![Image](resources/gluedatapipeline/image17.png)
 
 It seems that our job has successfully been activated. Indeed, a new
 file after running the pipeline has been created.
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image13.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
+![Image](resources/gluedatapipeline/image13.png)
 
 ## Step 7: Verification of the success of flattening
 
@@ -473,31 +360,26 @@ file has been addressed properly in the right place or intended place.
 
 Search for S3 service.
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image8.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
+![Image](resources/gluedatapipeline/image8.png)
 
 Click on the destination storing bucket.
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image18.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
+![Image](resources/gluedatapipeline/image18.png)
 
 Select the folder where it would be as the outcome and click on the
 file.
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image40.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
+![Image](resources/gluedatapipeline/image40.png)
 
 Click on *Download*.
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image14.png){width="7.334645669291339in"
-height="3.3472222222222223in"}
+![Image](resources/gluedatapipeline/image14.png)
 
 Let's verify that our data pipeline has processed all those steps on AWS
 cloud services according to the design in order to get a CSV file as the
 outcome.
 
-![](vertopal_1d3ed89f4c794dc4b84ed004eefa5d1b/media/image38.png){width="7.334645669291339in"
-height="3.2777777777777777in"}
+![Image](resources/gluedatapipeline/image38.png)
 
 ## Step 8: Clean and free up all resources used so far
 
