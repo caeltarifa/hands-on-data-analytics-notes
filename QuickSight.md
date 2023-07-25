@@ -74,18 +74,17 @@ the name of this analysis.
 
 ## Step 3 -- Visualize Sales by Month
 
-1.  Click the empty visual to ensure that it is selected (indicated by
-    > blue border).
+1.  Click the empty visual to ensure that it is selected (indicated by blue border).
 
 2.  From the **Fields list**, select **Sales** and **Order Date**.
 
 3.  Enlarge the visual if axis labels are not visible.
 
 4.  Click the **arrow** next to the Order Date label on your **X-axis**
-    > and choose t**he Aggregate-\>Month.\
-    > **Alternatively, you can expand the **Field Wells** section
-    > towards the top of the screen, use the **arrow** on the **Order
-    > Date** field and change the aggregation to **Month** from there.
+and choose t**he Aggregate-\>Month.\
+**Alternatively, you can expand the **Field Wells** section
+towards the top of the screen, use the **arrow** on the **Order
+Date** field and change the aggregation to **Month** from there.
 
 5.  Resize the visual to take about two third of the horizontal space.
 
@@ -93,18 +92,17 @@ the name of this analysis.
 
 ## Step 4 -- Add Forecast to Line Chart
 
-Let\'s use the in-built forecasting feature to add a forecast to our
-line chart.
+Let\'s use the in-built forecasting feature to add a forecast to our line chart.
 
 1.  From the visual menu in the upper right of the visual, click the
-    > ellipsis icon, and choose Add forecast.
+ellipsis icon, and choose Add forecast.
 
 2.  Optional - when adding/editing the forecast, you can apply backward
-    > forecast as well to see how close the forecast is to the actuals
-    > for the previous months.\
-    > Change Periods backward to 6, click Apply and check out the
-    > backward forecast.\
-    > Then, change Periods backward back to 0 and click Apply.
+forecast as well to see how close the forecast is to the actuals
+for the previous months.\
+Change Periods backward to 6, click Apply and check out the
+backward forecast.\
+Then, change Periods backward back to 0 and click Apply.
 
 3.  Close the Forecast properties panel and reopen Visualize panel.
 
@@ -115,30 +113,30 @@ line chart.
 1.  From top left of your screen, click + Add and then Add visual.
 
 2.  From Visual types panel, change the Visual Type to Key Performance
-    > Indicator (KPI).
+Indicator (KPI).
 
 3.  From Fields list, select Sales and Order Date.
 
 4.  In Field Wells panel, click the dropdown on the Order Date field and
-    > change the aggregation to Year.
+change the aggregation to Year.
 
 ![Guidelines](https://static.us-east-1.prod.workshops.aws/public/8215b450-c9d4-46ed-9185-f4975a8ad884/static/Author%20Workshop/1.Build%20Your%20First%20Dashboard/Exercises/NL-5-KPI.gif)
 
 ## Step 6 -- Add Suggested Insights
 
 1.  With the KPI visual selected, open the Insights panel from left
-    > rail.
+rail.
 
 2.  Click the + button on the MONTH OVER MONTH CHANGE suggested insight
-    > to add it to the Analysis.
+to add it to the Analysis.
 
 3.  Open the Insights panel again.
 
 4.  Click the + button on the FORECAST suggested insight to add it to
-    > the Analysis.
+the Analysis.
 
 5.  Resize the insights to be smaller, and move them to the right, just
-    > beneath your KPI visual.
+beneath your KPI visual.
 
 ![Guidelines](https://static.us-east-1.prod.workshops.aws/public/8215b450-c9d4-46ed-9185-f4975a8ad884/static/Author%20Workshop/1.Build%20Your%20First%20Dashboard/Exercises/NL-6-Insights.gif)
 
@@ -157,17 +155,17 @@ line chart.
 ## b -- Add Drill Down from Industry to Customer
 
 1.  From the Fields list, drag the Customer field just beneath the
-    > Industry field in the Field wells (make sure Field wells panel is
-    > expanded before you drag and drop). You need to drag it inside the
-    > blue box of the Group/Color field well, but just beneath the other
-    > field in there. You should see a message saying Add drill-down
-    > layer.
+Industry field in the Field wells (make sure Field wells panel is
+expanded before you drag and drop). You need to drag it inside the
+blue box of the Group/Color field well, but just beneath the other
+field in there. You should see a message saying Add drill-down
+layer.
 
 2.  Now you can click on Industry slices and you will see an option to
-    > Drill down to Customer, and it will show just customers from that
-    > industry. (You can drill back up by clicking on a slice and
-    > choosing the drill up option, or by using the Drill up arrow in
-    > the visual menu)
+Drill down to Customer, and it will show just customers from that
+industry. (You can drill back up by clicking on a slice and
+choosing the drill up option, or by using the Drill up arrow in
+the visual menu)
 
 ![Guidelines](https://static.us-east-1.prod.workshops.aws/public/8215b450-c9d4-46ed-9185-f4975a8ad884/static/Author%20Workshop/1.Build%20Your%20First%20Dashboard/Exercises/NL-7b-DrillDown.gif)
 
