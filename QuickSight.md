@@ -15,6 +15,7 @@
 ## Lab Setup
 
 <center>
+  
   ----------------------------------------
   | Time of performing | Required services  |
   |--------------------|--------------------|
