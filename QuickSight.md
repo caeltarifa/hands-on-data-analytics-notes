@@ -144,11 +144,11 @@ beneath your KPI visual.
 
 ### a -- Visualize Sales by Industry
 
-1.  Click + Add and then Add visual.
-
-2.  From Visual types panel, change the Visual Type to Donut chart.
-
-3.  From Fields list, select Industry and Sales.
+  1.  Click + Add and then Add visual.
+  
+  2.  From Visual types panel, change the Visual Type to Donut chart.
+  
+  3.  From Fields list, select Industry and Sales.
 
 ![Guidelines](https://static.us-east-1.prod.workshops.aws/public/8215b450-c9d4-46ed-9185-f4975a8ad884/static/Author%20Workshop/1.Build%20Your%20First%20Dashboard/Exercises/NL-7a-Donut.gif)
 
