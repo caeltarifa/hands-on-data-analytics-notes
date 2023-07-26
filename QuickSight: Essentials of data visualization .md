@@ -1,4 +1,4 @@
-# AWS QuickSight: Essential of data visualization
+# AWS QuickSight: Essentials of data visualization
 
 ## Objectives
 
@@ -25,19 +25,15 @@
 ## Steps
 
 1.  Create your dataset
-
 2.  Rename Analysis
-
 3.  Visualize Sales by Month
-
 4.  Add Forecast to Line Chart
-
 5.  Visualize Sales Year over Year
-
 6.  Add Suggested Insights
-
-7.  Visualize Sales by Industry
-
+7.  
+    a - Visualize Sales by Industry
+    b - Add Drill Down from Industry to Customer
+    c - Add Data Labels
 8.  Clean and free up all resources used so far
 
 ## Step 1 - Create your dataset
@@ -152,21 +148,19 @@ beneath your KPI visual.
 
 ### b - Add Drill Down from Industry to Customer
 
-1.  From the Fields list, drag the Customer field just beneath the
-Industry field in the Field wells (make sure Field wells panel is
-expanded before you drag and drop). You need to drag it inside the
-blue box of the Group/Color field well, but just beneath the other
-field in there. You should see a message saying Add drill-down
-layer.
+1.  From the **Fields list**, drag the Customer field just unuder the **Industry** field in the **Field wells** (make sure Field wells panel is expanded before you drag and drop). You need to drag it inside the blue box of the **Group/Color field well**, but just under the other field in there. You should see a message saying **Add drill-down layer**.
 
-2.  Now you can click on Industry slices and you will see an option to
-Drill down to Customer, and it will show just customers from that
-industry. (You can drill back up by clicking on a slice and
-choosing the drill up option, or by using the Drill up arrow in
-the visual menu)
+2.  Now you can click on **Industry** slices and you will see an option to **Drill down to Customer**, and it will show just customers from that industry. (You can drill back up by clicking on a slice and choosing the drill up option, or by using the Drill up arrow in the visual menu)
 
 ![Guidelines](https://static.us-east-1.prod.workshops.aws/public/8215b450-c9d4-46ed-9185-f4975a8ad884/static/Author%20Workshop/1.Build%20Your%20First%20Dashboard/Exercises/NL-7b-DrillDown.gif)
 
+### c - Add Data Labels
+1.  On the **Donut chart**, click the Format visual **pencil** icon to open **Format Visual** panel.
+2.  Expand the **Data labels** section.
+3.  Check the **Show metric** box.
+4.  Close the **Format Visual** panel.
+
+![Guidelines](https://static.us-east-1.prod.workshops.aws/public/8215b450-c9d4-46ed-9185-f4975a8ad884/static/Author%20Workshop/1.Build%20Your%20First%20Dashboard/Exercises/NL-7c-DataLabels.gif)
 ## Step 8: Clean and free up all resources used so far
 
 ## References
