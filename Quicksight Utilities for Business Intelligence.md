@@ -1,4 +1,4 @@
-# AWS QuickSight: Bussiness intelligence
+# AWS QuickSight: Utilities for Business Intelligence
 
 ## Objectives
 
@@ -6,6 +6,7 @@
 -   Enable interactive data exploration with Filter Control and Action.
 -   Improve dashboard usability with Dashboard Title and renamed Visual Titles.
 -   Streamline reporting through Email Reports and easy access.
+
 ## Lab Setup
 
 <center>
