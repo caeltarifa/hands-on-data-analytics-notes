@@ -16,11 +16,9 @@
 
 <center>
   
-  ----------------------------------------
   | Time of performing | Required services  |
   |--------------------|--------------------|
   | 15 minutes         | AWS S3, QuickSight|
-  ----------------------------------------
 
 </center>
 
@@ -40,9 +38,9 @@
 
 7.  Visualize Sales by Industry
 
-8.  Add Drill Down from Industry to Customer
+8.  Clean and free up all resources used so far
 
-## Step 1 -- Create your dataset
+## Step 1 - Create your dataset
 
 1.  On the left of your screen, choose **Datasets**.
 
@@ -58,7 +56,7 @@
 
 ![Guidelines](https://static.us-east-1.prod.workshops.aws/public/8215b450-c9d4-46ed-9185-f4975a8ad884/static/Author%20Workshop/1.Build%20Your%20First%20Dashboard/Exercises/NL-1-FileUpload.gif)
 
-## Step 2 -- Rename Analysis
+## Step 2 - Rename Analysis
 
 You are now in an Analysis view. This is where you can add visuals,
 adjust the layout and then publish your dashboard. First, let\'s change
@@ -72,7 +70,7 @@ the name of this analysis.
 
 ![Guidelines](https://static.us-east-1.prod.workshops.aws/public/8215b450-c9d4-46ed-9185-f4975a8ad884/static/Author%20Workshop/1.Build%20Your%20First%20Dashboard/Exercises/NL-2-RenameAnalysis.gif)
 
-## Step 3 -- Visualize Sales by Month
+## Step 3 - Visualize Sales by Month
 
 1.  Click the empty visual to ensure that it is selected (indicated by blue border).
 
@@ -90,7 +88,7 @@ Date** field and change the aggregation to **Month** from there.
 
 ![Guidelines](https://static.us-east-1.prod.workshops.aws/public/8215b450-c9d4-46ed-9185-f4975a8ad884/static/Author%20Workshop/1.Build%20Your%20First%20Dashboard/Exercises/NL-3-Line.gif)
 
-## Step 4 -- Add Forecast to Line Chart
+## Step 4 - Add Forecast to Line Chart
 
 Let\'s use the in-built forecasting feature to add a forecast to our line chart.
 
@@ -108,7 +106,7 @@ Then, change Periods backward back to 0 and click Apply.
 
 ![Guidelines](https://static.us-east-1.prod.workshops.aws/public/8215b450-c9d4-46ed-9185-f4975a8ad884/static/Author%20Workshop/1.Build%20Your%20First%20Dashboard/Exercises/NL-4-Forecast.gif)
 
-## Step 5 -- Visualize Sales Year over Year
+## Step 5 - Visualize Sales Year over Year
 
 1.  From top left of your screen, click + Add and then Add visual.
 
@@ -122,7 +120,7 @@ change the aggregation to Year.
 
 ![Guidelines](https://static.us-east-1.prod.workshops.aws/public/8215b450-c9d4-46ed-9185-f4975a8ad884/static/Author%20Workshop/1.Build%20Your%20First%20Dashboard/Exercises/NL-5-KPI.gif)
 
-## Step 6 -- Add Suggested Insights
+## Step 6 - Add Suggested Insights
 
 1.  With the KPI visual selected, open the Insights panel from left
 rail.
@@ -142,7 +140,7 @@ beneath your KPI visual.
 
 ## Step 7
 
-### a -- Visualize Sales by Industry
+### a - Visualize Sales by Industry
 
   1.  Click + Add and then Add visual.
   
@@ -152,7 +150,7 @@ beneath your KPI visual.
 
 ![Guidelines](https://static.us-east-1.prod.workshops.aws/public/8215b450-c9d4-46ed-9185-f4975a8ad884/static/Author%20Workshop/1.Build%20Your%20First%20Dashboard/Exercises/NL-7a-Donut.gif)
 
-### b -- Add Drill Down from Industry to Customer
+### b - Add Drill Down from Industry to Customer
 
 1.  From the Fields list, drag the Customer field just beneath the
 Industry field in the Field wells (make sure Field wells panel is
