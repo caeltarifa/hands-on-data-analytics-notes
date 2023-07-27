@@ -20,10 +20,13 @@ Knowing that the data come from this configuration, we will see how to bring up 
 
 <center>
 
+<div style="text-align: center;">
+
 | Time of performing | Required services         |
 |--------------------|---------------------------|
 | 15 minutes         | AWS S3, Cloud Shell       |
 
+</div>
 
 </center>
 

@@ -10,11 +10,12 @@
 ## Lab Setup
 
 <center>
+<div style="text-align: center;">
   
-  | Time of performing | Required services  |
+  | Time of performing | Required AWS services |
   |--------------------|--------------------|
-  | 15 minutes         | AWS S3, QuickSight|
-
+  | 15 minutes         | S3, QuickSight|
+</div>
 </center>
 
 ## Steps

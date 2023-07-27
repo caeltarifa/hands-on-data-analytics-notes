@@ -1,12 +1,3 @@
-<style>
-  img {
-    width: 7.334645669291339in;
-    height: 3.3472222222222223in;
-    display: block;
-    margin: 0 auto;
-  }
-</style>
-
 # Automated Data Pipeline using SPARK, AWS GLUE, LAMBDA & S3
 
 ## Objectives
@@ -20,9 +11,9 @@
 <center>
 <div style="text-align: center;">
 
-| Time of performing  | 30 minutes                                   |
-|---------------------|----------------------------------------------|
-| Required services   | Amazon S3, Glue, Lambda, CloudWatch, and PySpark |
+| Time of performing  | Required AWS services                      |
+|---------------------|--------------------------------------------|
+| 30 minutes          |  S3, Glue, Lambda, CloudWatch, and PySpark |
 
 </div>
 </center>
@@ -204,28 +195,23 @@ def main():
 main()
 ```
 
-Review the code previously and establish that destination S3 bucket is
-figuring in the code as follows.
+Review the code previously and establish that destination S3 bucket is figuring in the code as follows.
 
 ![Image](./resources/gluedatapipeline/image45.png)
 
-Review additional details like name, description, and bind the role
-created in step 2.
+Click on the **Job details** tab. Review additional details like name, description, and bind the role created in step 2.
 
 ![Image](./resources/gluedatapipeline/image22.png)
 
-Select the environment of development that will make sure to run the
-data pipeline by spark algorithms.
+Select the environment of development that will make sure to run the data pipeline by spark algorithms.
 
 ![Image](./resources/gluedatapipeline/image15.png)
 
-Keep these options selected because it would be useful to optimize
-costs. And, press *Save.*
+Keep these options selected because it would be useful to optimize costs. And, press *Save.*
 
 ![Image](./resources/gluedatapipeline/image39.png)
 
-Upon saving the script and its configuration will show up a message of
-the updating.
+Upon saving the script and its configuration will show up a message of the updating.
 
 ![Image](./resources/gluedatapipeline/image2.png)
 
@@ -236,15 +222,9 @@ the job.
 
 ## Step 6: Activate the Lambda function and Glue job
 
-Now, the memento of verification that our data pipeline is flatting our
-JSON data structured to CSV format has come. First, we need to write a
-file, save it, and upload it to the source storage in S3 so our lambda
-function will note this new file after being triggered during the
-uploading. The serverless function will activate the glue job. Finally,
-the data pipeline will process the data import to output as a CSV file at
-the destination storage S3 bucket.
+Now, the memento of verification that our data pipeline is flatting our JSON data structured to CSV format has come. First, we need to write a file, save it, and upload it to the source storage in S3 so our lambda function will note this new file after being triggered during the uploading. The serverless function will activate the glue job. Finally, the data pipeline will process the data import to output as a CSV file at the destination storage S3 bucket.
 
-Write a JSON file.
+Write this JSON file.
 
 ```json
 {
@@ -274,13 +254,11 @@ Go to the source S3 bucket and add the file written.
 
 ![Image](resources/gluedatapipeline/image24.png)
 
-Once the file has been uploaded, the trigger has automatically been
-activated.
+Once the file has been uploaded, the trigger has automatically been activated.
 
 ![Image](resources/gluedatapipeline/image26.png)
 
-Let's see in the tab of *Monitor* from our lambda function. And open an
-external tab after clicking on *View CloudWatch Logs* button*.*
+Let's see in the tab of *Monitor* from our lambda function. And open an external tab after clicking on *View CloudWatch Logs* button.
 
 ![Image](resources/gluedatapipeline/image32.png)
 
@@ -288,30 +266,25 @@ AWS CloudWatch service is opened, and click on *Search log group.*
 
 ![Image](resources/gluedatapipeline/image11.png)
 
-We see the last logs which can verify the activity of our function. It
-was on.
+We see the last logs which can verify the activity of our function. It was on.
 
 ![Image](resources/gluedatapipeline/image35.png)
 
-On the left side, press *Log Groups* to see all the last log streams
-that ran.
+On the left side, press *Log Groups* to see all the last log streams that ran.
 
 ![Image](resources/gluedatapipeline/image7.png)
 
-Now, let's verify that our ETL job on Glue is working accordingly by
-reachin Glue service again and clicking the job.
+Now, let's verify that our ETL job on Glue is working accordingly by reaching Glue service again and clicking the job.
 
 ![Image](resources/gluedatapipeline/image17.png)
 
-It seems that our job has successfully been activated. Indeed, a new
-file after running the pipeline has been created.
+It seems that our job has successfully been activated. Indeed, a new file after running the pipeline has been created.
 
 ![Image](resources/gluedatapipeline/image13.png)
 
 ## Step 7: Verification of the success of flattening
 
-At last and after running all processes above, let's verify that our
-file has been addressed properly in the right place or intended place.
+At last and after running all processes above, let's verify that our file has been addressed properly in the right place or intended place.
 
 Search for S3 service.
 
@@ -321,8 +294,7 @@ Click on the destination storing bucket.
 
 ![Image](resources/gluedatapipeline/image18.png)
 
-Select the folder where it would be as the outcome and click on the
-file.
+Select the folder where it would be as the outcome and click on the file.
 
 ![Image](resources/gluedatapipeline/image40.png)
 
@@ -330,9 +302,7 @@ Click on *Download*.
 
 ![Image](resources/gluedatapipeline/image14.png)
 
-Let's verify that our data pipeline has processed all those steps on AWS
-cloud services according to the design in order to get a CSV file as the
-outcome.
+Let's verify that our data pipeline has processed all those steps on AWS cloud services according to the design in order to get a CSV file as the outcome.
 
 ![Image](resources/gluedatapipeline/image38.png)
 
@@ -340,11 +310,8 @@ outcome.
 
 ## References
 
-[[Building a reliable data
-pipeline]{.underline}](https://docs.aws.amazon.com/whitepapers/latest/aws-glue-best-practices-build-secure-data-pipeline/building-a-reliable-data-pipeline.html)
+[Building a reliable data pipeline](https://docs.aws.amazon.com/whitepapers/latest/aws-glue-best-practices-build-secure-data-pipeline/building-a-reliable-data-pipeline.html)
 
-[[AWS Glue Developer
-Guide]{.underline}](https://docs.aws.amazon.com/glue/latest/dg/what-is-glue.html)
+[AWS Glue Developer Guide](https://docs.aws.amazon.com/glue/latest/dg/what-is-glue.html)
 
-[[Passing and accessing Python parameters in AWS
-Glue]{.underline}](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
+[Passing and accessing Python parameters in AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
